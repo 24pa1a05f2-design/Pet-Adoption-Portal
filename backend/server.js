@@ -49,16 +49,18 @@ let applications = []; // Mock applications
 app.get('/api/pets', async (req, res) => {
   try {
     if (db) {
+      // This only runs if you have a real Firebase Database
       const snapshot = await db.collection('pets').get();
       const petList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       return res.json(petList);
     } else {
-      // THIS IS THE FIX: If no DB, send the mock 'pets' array from Line 40
+      // --- THIS IS THE MISSING PIECE ---
+      // If there is no DB, we MUST send the mock pets array
       console.log("No DB found, sending mock pets list");
-      return res.json(pets);
+      return res.json(pets); 
     }
   } catch (e) {
-    console.error(e);
+    console.error("Error:", e);
     return res.status(500).json({ error: 'Failed to fetch pets' });
   }
 });
