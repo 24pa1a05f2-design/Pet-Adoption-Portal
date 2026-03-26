@@ -47,17 +47,20 @@ let pets = [
 let applications = []; // Mock applications
 
 app.get('/api/pets', async (req, res) => {
-  if (db) {
-    try {
+  try {
+    if (db) {
       const snapshot = await db.collection('pets').get();
       const petList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       return res.json(petList);
-    } catch (e) {
-      console.error(e);
-      return res.status(500).json({ error: 'Failed to fetch pets' });
+    } else {
+      // THIS IS THE FIX: If no DB, send the mock 'pets' array from Line 40
+      console.log("No DB found, sending mock pets list");
+      return res.json(pets);
     }
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ error: 'Failed to fetch pets' });
   }
-  res.json(pets);
 });
 
 app.post('/api/pets', async (req, res) => {
