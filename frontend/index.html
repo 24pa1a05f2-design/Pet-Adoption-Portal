@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pet Adoption Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <!-- We will rely on style.css to bring the premium design aesthetics -->
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav id="navbar" class="navbar">
+    <div class="logo">🐾 Furry Friends</div>
+    <div id="nav-links" class="nav-links">
+      <!-- Dynamically injected links based on auth -->
+    </div>
+  </nav>
+
+  <!-- App Container -->
+  <main id="app" class="app-container">
+    <!-- Main content injected via JS -->
+  </main>
+
+  <!-- Premium Login Modal (Hidden initially) -->
+  <div id="auth-modal" class="modal hidden">
+    <div class="modal-content glass-panel">
+      <button id="close-auth" class="close-btn">&times;</button>
+      <h2 id="auth-title">Create an Account</h2>
+      <form id="auth-form" class="auth-form">
+        <input type="email" id="auth-email" placeholder="Email Address" required />
+        <input type="password" id="auth-password" placeholder="Password" required />
+
+        <div id="role-selection">
+          <p>Select Role:</p>
+          <label><input type="radio" name="role" value="user" checked> Adopter</label>
+          <label><input type="radio" name="role" value="admin"> Administrator</label>
+        </div>
+
+        <button type="submit" id="auth-submit" class="btn primary-btn large">Sign Up</button>
+      </form>
+      <p id="auth-toggle-text">Already have an account? <span id="auth-toggle-link" class="link">Log In</span></p>
+      <p id="auth-error" class="error-text hidden"></p>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script type="module" src="./main.js"></script>
+</body>
+
+</html>
